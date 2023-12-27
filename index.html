@@ -10,10 +10,14 @@
     <script>
       async function main() {
         let pyodide = await loadPyodide();
+        await pyodide.loadPackage("micropip");
+        const micropip = pyodide.pyimport("micropip");
+        await micropip.install("networkx");
 
         pyodide.runPython(`
+          import networkx
           print('Hello world, from the browser!')
-
+          print('NetworkX version {}'.format(networkx.__version__))
           import js
           js.document.title = "Hello from Python"
 
