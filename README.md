@@ -3,7 +3,7 @@ A Spacehulk map generator using wave function collapse to create both a map and 
 
 Will be implemented as a SPA using pyiodide so that it can be easily reused.
 
-Input
+1. Input
     1. Map size 
         1. x width in tiles
         2. y height in tiles
@@ -12,7 +12,7 @@ Input
     3. Constraints
         1. Rules for which tiles can be placed against each other tiles
     
-Output
+2. Output
     1. Map
     2. Network Graph
         1. Each Node to have the x and y coordinates of the tile it refers to
