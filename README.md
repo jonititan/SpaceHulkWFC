@@ -1,5 +1,11 @@
 # SpaceHulkWFC
 A Spacehulk map generator using wave function collapse to create both a map and a network graph of the map
+Inspired by the [Space Hulk](https://en.wikipedia.org/wiki/Space_Hulk) game but intended to be used in a [Wrath & Glory](https://cubicle7games.com/our-games/wrath-glory) campaign.
+
+I was impressed by the generator created by [LordFckHelmchen](https://github.com/LordFckHelmchen) [Wrath & Glory Space Hulk Generator](https://github.com/LordFckHelmchen/wrath-and-glory-space-hulk-generator) but the result didn't really match what I wanted.
+
+The large rooms connected by thin corridors didn't really match the aesthetic I admired from space hulk.
+It also didn't create any sort of room listing which I think is essential for planning a game to use the map.
 
 Will be implemented as a SPA using pyiodide so that it can be easily reused.
 
