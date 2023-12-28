@@ -31,6 +31,30 @@
           js.document.title = "Hello from Python"
 
           js.document.getElementById("title").innerText = "Replaced by Python"
+          import numpy as np
+          from js import document, ImageData
+          from pyodide import create_proxy
+          
+          # converting numpy array to an ImageData object
+          # through Uint8ClampedArray representation
+          h, w, d = im.shape
+          im = np.ravel(np.uint8(np.reshape(im, (h * w * d, -1)))).tobytes()
+          pixels_proxy = create_proxy(im)
+          pixels_buf = pixels_proxy.getBuffer("u8clamped")
+          img_data = ImageData.new(pixels_buf.data, w, h)
+          
+          # rendering the ImageData object onto a canvas element
+          canvas_element = document.createElement("map")
+          canvas_element.width = w
+          canvas_element.height = h
+          ctx = canvas_element.getContext("2d")
+          ctx.putImageData(img_data, 0, 0)
+          
+          # clean-up
+          pixels_proxy.destroy()
+          pixels_buf.release()
+
+          
         `);
       };
 
