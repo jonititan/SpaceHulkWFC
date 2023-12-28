@@ -6,15 +6,16 @@
   </head>
 
   <body>
-    <div class="h-20">
-mu:
-<input id='x' value='3' type="number">
-<br><br>
-sigma:
-<input id='y' value='3' type="number">
-<br><br>
-<button onclick='pyodide.globals.get("generate_plot_img")()'>Plot</button>
-<br></div>
+    <div id="controls" >
+      <p id="title">My first Pyodide app</p>
+        mu:
+        <input id='x' value='3' type="number">
+        <br><br>
+        sigma:
+        <input id='y' value='3' type="number">
+        <br><br>
+        <button onclick='pyodide.globals.get("generate_plot_img")()'>Plot</button>
+        <br></div>
 <div class="h-80"><img id="map" /></div>
         
 
