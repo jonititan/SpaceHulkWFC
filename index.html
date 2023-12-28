@@ -20,7 +20,9 @@
         
 
     <script>
-   const python_code = `
+ 
+
+const python_code = `
 from js import document
 import numpy as np
 import scipy.stats as stats
@@ -29,8 +31,8 @@ import io, base64
 
 def generate_plot_img():
   # get values from inputs
-  mu = int(document.getElementById('x').value)
-  sigma = int(document.getElementById('y').value)
+  mu = int(document.getElementById('mu').value)
+  sigma = int(document.getElementById('sigma').value)
   # generate an interval
   x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
   # calculate PDF for each value in the x given mu and sigma and plot a line 
@@ -43,7 +45,7 @@ def generate_plot_img():
   # encode the image as Base64 string
   img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
   # show the image
-  img_tag = document.getElementById('fig')
+  img_tag = document.getElementById('map')
   img_tag.src = img_str
   buf.close()
 `;
