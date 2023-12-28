@@ -6,14 +6,16 @@
   </head>
 
   <body>
-    <div id="controls" >
-      <p id="title">My first Pyodide app</p>
-    </div>
-    <div class="h-80">
-    <div id="map" class="object-scale-down grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-y-1 gap-x-1">
-      
-        </div>
-      </div>
+    <div class="h-20">
+mu:
+<input id='x' value='3' type="number">
+<br><br>
+sigma:
+<input id='y' value='3' type="number">
+<br><br>
+<button onclick='pyodide.globals.get("generate_plot_img")()'>Plot</button>
+<br></div>
+<div class="h-80"><img id="map" /></div>
         
 
     <script>
@@ -31,75 +33,45 @@
           js.document.title = "Hello from Python"
 
           js.document.getElementById("title").innerText = "Replaced by Python"
-          import numpy as np
-          from js import document, ImageData
-          from pyodide import create_proxy
-          
-          # converting numpy array to an ImageData object
-          # through Uint8ClampedArray representation
-          h, w, d = im.shape
-          im = np.ravel(np.uint8(np.reshape(im, (h * w * d, -1)))).tobytes()
-          pixels_proxy = create_proxy(im)
-          pixels_buf = pixels_proxy.getBuffer("u8clamped")
-          img_data = ImageData.new(pixels_buf.data, w, h)
-          
-          # rendering the ImageData object onto a canvas element
-          canvas_element = document.createElement("map")
-          canvas_element.width = w
-          canvas_element.height = h
-          ctx = canvas_element.getContext("2d")
-          ctx.putImageData(img_data, 0, 0)
-          
-          # clean-up
-          pixels_proxy.destroy()
-          pixels_buf.release()
-
           
         `);
       };
 
       main();
-      class App {
-        state = {
-          titles:[],
-        }
-      
-        view() {
-          return `<div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>`
-        }
-      
-        render() {
-          map.innerHTML = this.view();
-        }
-      }
-      var appComponent = new App();
-      appComponent.render();
+   const python_code = `
+from js import document
+import numpy as np
+import scipy.stats as stats
+import matplotlib.pyplot as plt
+import io, base64
+
+def generate_plot_img():
+  # get values from inputs
+  mu = int(document.getElementById('mu').value)
+  sigma = int(document.getElementById('sigma').value)
+  # generate an interval
+  x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
+  # calculate PDF for each value in the x given mu and sigma and plot a line 
+  plt.plot(x, stats.norm.pdf(x, mu, sigma))
+  # create buffer for an image
+  buf = io.BytesIO()
+  # copy the plot into the buffer
+  plt.savefig(buf, format='png')
+  buf.seek(0)
+  # encode the image as Base64 string
+  img_str = 'data:image/png;base64,' + base64.b64encode(buf.read()).decode('UTF-8')
+  # show the image
+  img_tag = document.getElementById('fig')
+  img_tag.src = img_str
+  buf.close()
+`;
+
+(async () => { // create anonymous async function to enable await
+  window.pyodide = await loadPyodide() 
+  await pyodide.loadPackagesFromImports(python_code)
+  await pyodide.runPythonAsync(python_code)
+
+})()
     </script>
   </body>
 </html>
