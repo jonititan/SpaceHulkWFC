@@ -11,33 +11,7 @@
     </div>
     <div class="h-80">
     <div id="map" class="object-scale-down grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-y-1 gap-x-1">
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
-      <div><img
-          class="block object-scale-down h-100 w-100 object-center"
-          src="media/3x3square.png" /></div>
+      
         </div>
       </div>
         
@@ -61,6 +35,45 @@
       };
 
       main();
+      class App {
+        state = {
+          titles:[],
+        }
+      
+        view() {
+          return `<<div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>
+      <div><img
+          class="block object-scale-down h-100 w-100 object-center"
+          src="media/3x3square.png" /></div>`
+        }
+      
+        render() {
+          map.innerHTML = this.view();
+        }
+      }
     </script>
   </body>
 </html>
