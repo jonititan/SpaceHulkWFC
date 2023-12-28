@@ -47,8 +47,8 @@ import io, base64
 
 def generate_plot_img():
   # get values from inputs
-  mu = int(document.getElementById('mu').value)
-  sigma = int(document.getElementById('sigma').value)
+  mu = int(document.getElementById('x').value)
+  sigma = int(document.getElementById('y').value)
   # generate an interval
   x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
   # calculate PDF for each value in the x given mu and sigma and plot a line 
